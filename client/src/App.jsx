@@ -6,31 +6,38 @@ import { useState } from "react";
 import loadingIcon from "./assets/loader.svg";
 
 const App = () => {
-  const [input, setInput] = ("");
-  const [post, setPost] = ([]);
+  // Declare state variables
+  const [input, setInput] = useState(""); // input state variable for text input field
+  const [posts, setPosts] = useState([]); // posts state variable for chat history
 
-
+  // Function to handle form submission
   const onSubmit = () => {
-    if(input.trim() === "") return;
-    updatePosts(input)
-  }
+    // Ignore empty input
+    if (input.trim() === "") return;
 
-  const updatePosts = (post) => {
-    setPosts(prevState => {
-      return [
-        ...prevState,
-        {type: "user", post}
-      ]
-    })
-  }
+    // Add user input to chat history
+    updatePosts(input);
 
-  const onKeyUp = (e) => {
-    if(e.key === "Enter" || e.witch === 13){
-        onSubmit()
-    }
-
+    // Clear input field
+    setInput("");
   };
 
+  // Function to update chat history with new post
+  const updatePosts = (post) => {
+    setPosts((prevState) => {
+      return [...prevState, { type: "user", post }];
+    });
+  };
+
+  // Function to handle key press events in input field
+  const onKeyUp = (e) => {
+    // Submit form if Enter key is pressed
+    if (e.key === "Enter" || e.which === 13) {
+      onSubmit();
+    }
+  };
+
+  // Render chat application UI
   return (
     <div>
       <main className="chatGPT-app">
@@ -50,11 +57,12 @@ const App = () => {
                         ? bot
                         : user
                     }
+                    alt="Avatar"
                   />
                 </div>
                 {post.type === "loading" ? (
                   <div className="loader">
-                    <img src={loadingIcon} />
+                    <img src={loadingIcon} alt="Loading" />
                   </div>
                 ) : (
                   <div className="post">{post.post}</div>
@@ -69,11 +77,12 @@ const App = () => {
             autoFocus
             type="text"
             placeholder="Ask Anything"
-            onChange={() => {(e)=> setInput(e.target.value)}}
-            onKeyUp={onKeyUp}
+            value={input} // Bind input field value to input state variable
+            onChange={(e) => setInput(e.target.value)} // Update input state variable on change
+            onKeyUp={onKeyUp} // Handle key press events
           />
           <div className="send-button" onClick={onSubmit}>
-            <img src={send} />
+            <img src={send} alt="Send" />
           </div>
         </footer>
       </main>
