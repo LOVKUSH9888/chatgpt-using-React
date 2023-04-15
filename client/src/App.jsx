@@ -24,9 +24,12 @@ const App = () => {
     })
   }
 
-  const onKeyUp = () => {
+  const onKeyUp = (e) => {
+    if(e.key === "Enter" || e.witch === 13){
+        onSubmit()
+    }
 
-  }
+  };
 
   return (
     <div>
