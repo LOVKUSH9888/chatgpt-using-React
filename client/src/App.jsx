@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
+import send from './assets/send.svg'
+import user from './assets/user.png'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <main className='chatGPT-app'>
+      <section className="chat-container">
+      <div className="layout">
+        <div className="chat-bubble">
+          <div className="avatar">
+            <img src={user}/>
+          </div>
+          <div className="post">Lorem, ipsum dolor.</div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      </section>
+      <footer>
+        <input className='composebar'
+        autoFocus
+        type='text'
+        placeholder='Ask Anything'
+        onChange={()=> {}} />
+        <div className="send-button">
+          <img src= {send} />
+        </div>
+      </footer>
+
+      </main>
     </div>
   )
 }
 
-export default App
+export default App;
+
